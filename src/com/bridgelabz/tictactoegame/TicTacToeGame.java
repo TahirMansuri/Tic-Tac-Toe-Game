@@ -7,23 +7,25 @@ public class TicTacToeGame {
     private static char[] playingBoard = new char[10];
     private static char playingSybmol;
 
-
     //UC 1 Method for initializing board position
     private static void initializeBoard() {
         for(int i = 1; i < 10; i++) {
-            playingBoard[i] = ' ';
+            playingBoard[i] = '_';
         }
     }
 
     //Showing the Board Elements
-//    private static void showBoard() {
-//        for(int i = 1; i < 10; i++) {
-//            for(int j = 0; j < 3; j++) {
-//                System.out.print(playingBoard[i]);
-//            }
-//            System.out.println("");
-//        }
-//    }
+    private static void showBoard() {
+        for (int i = 1; i < 10; i++) {
+            if ((i) % 3 == 0) {
+                System.out.println(playingBoard[i]);
+                if (i != 10 - 1) {
+                    System.out.println("-----");
+                }
+            } else {
+                System.out.print(playingBoard[i] + "|");
+            }
+        }    }
 
     //UC 2 Method for setting Input Symbol for User
     private static void setPlayingSymbol() {
@@ -46,7 +48,6 @@ public class TicTacToeGame {
         }
     }
 
-
     public static void main(String[] args) {
 
         //Tic Tac Toe Game Development
@@ -57,5 +58,7 @@ public class TicTacToeGame {
 
         //Setting the Symbol for Play
         setPlayingSymbol();
+
+        showBoard();
     }
 }
