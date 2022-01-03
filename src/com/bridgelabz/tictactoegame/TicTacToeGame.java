@@ -1,15 +1,51 @@
 package com.bridgelabz.tictactoegame;
 
+import java.util.Scanner;
+
 public class TicTacToeGame {
     //Playing Board Array for Locations
     private static char[] playingBoard = new char[10];
+    private static char playingSybmol;
+
 
     //UC 1 Method for initializing board position
     private static void initializeBoard() {
-        for(int i=1; i<10; i++) {
-            playingBoard[i]=' ';
+        for(int i = 1; i < 10; i++) {
+            playingBoard[i] = ' ';
         }
     }
+
+    //Showing the Board Elements
+//    private static void showBoard() {
+//        for(int i = 1; i < 10; i++) {
+//            for(int j = 0; j < 3; j++) {
+//                System.out.print(playingBoard[i]);
+//            }
+//            System.out.println("");
+//        }
+//    }
+
+    //UC 2 Method for setting Input Symbol for User
+    private static void setPlayingSymbol() {
+        while(playingSybmol != 'X' && playingSybmol != 'O') {
+            System.out.println("Please Select the Symbol for Play: X or O");
+            //Scanner Method for User Input
+            Scanner sc = new Scanner(System.in);
+            playingSybmol = sc.next().charAt(0);
+            switch (playingSybmol) {
+                case 'X':
+                    System.out.println("Player Selected " + playingSybmol + " Symbol");
+                    break;
+                case 'O':
+                    System.out.println("Player Selected " + playingSybmol + " Symbol");
+                    break;
+                default:
+                    System.out.println("Please Select the Symbol From X or O only");
+                    break;
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
 
@@ -18,5 +54,8 @@ public class TicTacToeGame {
 
         //Initializing the Playing Board boxes
         initializeBoard();
+
+        //Setting the Symbol for Play
+        setPlayingSymbol();
     }
 }
