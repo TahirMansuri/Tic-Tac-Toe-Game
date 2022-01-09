@@ -5,13 +5,20 @@ import java.util.Scanner;
 
 public class TicTacToeGame {
     //Playing Board Array for Locations
-    private static char[] playingBoard = new char[10];
+    private static char[] playingBoard;
     private static char player1Sybmol,player2Symbol;
     private static int player1Play = 1;
 
     //Making Scanner Object Global
     static Scanner sc;
 
+    //Method to Initialize the Playing Board, Player Symbols
+    private static void initializeGame() {
+        playingBoard = new char[10];
+        player1Sybmol = ' ';
+        player2Symbol = ' ';
+        initializeBoard();
+    }
 
     //Method to Initialize Scanner Object
     private static void initScanner() {
@@ -44,7 +51,7 @@ public class TicTacToeGame {
             System.out.println("Player 1 Please Select the Symbol for Play: X or O");
             //Scanner Object Initilize Method for User Input
             initScanner();
-            player1Sybmol = sc.next().charAt(0);
+            player1Sybmol = sc.next().toUpperCase().charAt(0);
             switch (player1Sybmol) {
                 case 'X':
                     player2Symbol = 'O';
@@ -187,22 +194,24 @@ public class TicTacToeGame {
         //Tic Tac Toe Game Development
         System.out.println("Welcome to Tic Tac Toe Game Simulator.");
 
-        //Initializing the Playing Board boxes
-        initializeBoard();
-
-        //Setting the Symbol for Play
-        setPlayingSymbol();
-
-        //Showing the Initial Board
-        showBoard();
-
-        //Flip the Toss for Player Play Chance
-        flipToss();
-
         //Play the Game till Win Or Draw
-        while(!checkWin()) {
-            playGame();
+        char userChoice;
+        do {
+            //Set The New Game
+            initializeGame();
+            //Setting the Symbol for Play
+            setPlayingSymbol();
+            //Showing the Initial Board
             showBoard();
-        }
+            //Flip the Toss for Player Play Chance
+            flipToss();
+
+            while(!checkWin()) {
+                playGame();
+                showBoard();
+            }
+            System.out.println("Do you want to Play Again? (Y/N) :");
+            userChoice = sc.next().toUpperCase().charAt(0);
+        }while(userChoice == 'Y');
     }
 }
