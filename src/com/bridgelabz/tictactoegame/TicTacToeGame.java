@@ -14,7 +14,7 @@ public class TicTacToeGame {
         }
     }
 
-    //Showing the Board Elements
+    //UC 3 Showing the Board Elements
     private static void showBoard() {
         for (int i = 1; i < 10; i++) {
             if ((i) % 3 == 0) {
@@ -25,7 +25,8 @@ public class TicTacToeGame {
             } else {
                 System.out.print(playingBoard[i] + "|");
             }
-        }    }
+        }
+    }
 
     //UC 2 Method for setting Input Symbol for User
     private static void setPlayingSymbol() {
