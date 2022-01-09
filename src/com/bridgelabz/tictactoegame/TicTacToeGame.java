@@ -122,6 +122,66 @@ public class TicTacToeGame {
         }
     }
 
+    //UC 7 Check for Winner or Draw
+    private static boolean checkWin() {
+        if(checkDraw()) {
+            System.out.println("The Game is DRAW. As there is no any location for Player Symbol.");
+            showBoard();
+            return true;
+        } else {
+            if(checkDiagonal() || checkColumnWin() || checkRowWin()) {
+                if(player1Play == 0) {
+                    System.out.println("Player 1 WON THE GAME !!!!");
+                } else {
+                    System.out.println("Player 2 WON THE GAME !!!!");
+                }
+                showBoard();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Method to check for Game Draw
+    private static boolean checkDraw() {
+        boolean flag = true;
+        for(int i = 1; i <= 9; i++) {
+            if(playingBoard[i] == '_') {
+                flag = false;
+            }
+        }
+        return flag;
+    }
+
+    //Method to check for Diagonal Win
+    private static boolean checkDiagonal() {
+        if(!(playingBoard[1] == '_') && playingBoard[1] == playingBoard[5] && playingBoard[1] == playingBoard[9]
+                || !(playingBoard[3] == '_') && playingBoard[3] == playingBoard[5] && playingBoard[3] == playingBoard[7]) {
+            return true;
+        }
+        return false;
+    }
+
+    //Method to Check for Row Win
+    private static boolean checkRowWin() {
+        for( int i = 1; i < playingBoard.length; i += 3) {
+            if(!(playingBoard[i] == '_') && playingBoard[i] == playingBoard[i+1] && playingBoard[i] == playingBoard[i+2]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Method to Check for Column Win
+    private static boolean checkColumnWin() {
+        for(int i = 1; i <= 3; i++) {
+            if(!(playingBoard[i] == '_') && playingBoard[i] == playingBoard[i+3] && playingBoard[i] == playingBoard[i+6]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
 
         //Tic Tac Toe Game Development
@@ -140,7 +200,7 @@ public class TicTacToeGame {
         flipToss();
 
         //Play the Game till Win Or Draw
-        while(true) {
+        while(!checkWin()) {
             playGame();
             showBoard();
         }
