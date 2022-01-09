@@ -73,17 +73,39 @@ public class TicTacToeGame {
 
     //UC 4 Get User Input and Move on Board
     private static void playGame() {
-        initScanner();
         if(player1Play == 1) {
-            System.out.println("Player 1 Please Enter Your Position for Play : ");
-            int playerPosition = sc.nextInt();
-            playingBoard[playerPosition] = player1Sybmol;
+            getSymbol(1,player1Sybmol);
         } else {
-            System.out.println("Player 2 Please Enter Your Position for Play : ");
-            int playerPosition = sc.nextInt();
-            playingBoard[playerPosition] = player2Symbol;
+            getSymbol(2,player2Symbol);
         }
         setPlayChance();
+    }
+
+    //Methode for Getting Input From Player
+    private static void getSymbol(int playerNo,char symbol) {
+        initScanner();
+        int playerPosition;
+        System.out.println("Player "+playerNo+" Please Enter the Position for Your Play :");
+        playerPosition = sc.nextInt();
+        if(checkFreePosition(playerPosition)) {
+            playingBoard[playerPosition] = symbol;
+        } else {
+            playGame();
+            setPlayChance();
+        }
+    }
+
+    //Uc 5 Check for Free Space and Make Move
+    private static boolean checkFreePosition(int enteredPosition) {
+        if(enteredPosition < 1 || enteredPosition > 9) {
+            System.out.println("Please Enter the Position between 1 to 9 only.");
+            return false;
+        } else if(playingBoard[enteredPosition] != '_') {
+            System.out.println("Entered Location Contain Symbol. Please Enter Another Location.");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public static void main(String[] args) {
