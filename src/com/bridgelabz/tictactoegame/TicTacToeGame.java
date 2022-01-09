@@ -5,8 +5,17 @@ import java.util.Scanner;
 public class TicTacToeGame {
     //Playing Board Array for Locations
     private static char[] playingBoard = new char[10];
-    private static char playingSybmol;
+    private static char player1Sybmol,player2Symbol;
+    private static int player1Play = 1;
 
+    //Making Scanner Object Global
+    static Scanner sc;
+
+
+    //Method to Initialize Scanner Object
+    private static void initScanner() {
+        sc = new Scanner(System.in);
+    }
     //UC 1 Method for initializing board position
     private static void initializeBoard() {
         for(int i = 1; i < 10; i++) {
@@ -30,23 +39,51 @@ public class TicTacToeGame {
 
     //UC 2 Method for setting Input Symbol for User
     private static void setPlayingSymbol() {
-        while(playingSybmol != 'X' && playingSybmol != 'O') {
-            System.out.println("Please Select the Symbol for Play: X or O");
-            //Scanner Method for User Input
-            Scanner sc = new Scanner(System.in);
-            playingSybmol = sc.next().charAt(0);
-            switch (playingSybmol) {
+        while(player1Sybmol != 'X' && player1Sybmol != 'O') {
+            System.out.println("Player 1 Please Select the Symbol for Play: X or O");
+            //Scanner Object Initilize Method for User Input
+            initScanner();
+            player1Sybmol = sc.next().charAt(0);
+            switch (player1Sybmol) {
                 case 'X':
-                    System.out.println("Player Selected " + playingSybmol + " Symbol");
+                    player2Symbol = 'O';
+                    System.out.println("Player 1 Selected " + player1Sybmol + " Symbol");
+                    System.out.println("Player 2 Selected " + player2Symbol + " Symbol");
                     break;
                 case 'O':
-                    System.out.println("Player Selected " + playingSybmol + " Symbol");
+                    player2Symbol = 'X';
+                    System.out.println("Player 1 Selected " + player1Sybmol + " Symbol");
+                    System.out.println("Player Selected " + player2Symbol + " Symbol");
                     break;
                 default:
                     System.out.println("Please Select the Symbol From X or O only");
                     break;
             }
         }
+    }
+
+    //Method for Setting Player Turn
+    private static void setPlayChance() {
+        if(player1Play == 1) {
+            player1Play = 0;
+        } else {
+            player1Play = 1;
+        }
+    }
+
+    //UC 4 Get User Input and Move on Board
+    private static void playGame() {
+        initScanner();
+        if(player1Play == 1) {
+            System.out.println("Player 1 Please Enter Your Position for Play : ");
+            int playerPosition = sc.nextInt();
+            playingBoard[playerPosition] = player1Sybmol;
+        } else {
+            System.out.println("Player 2 Please Enter Your Position for Play : ");
+            int playerPosition = sc.nextInt();
+            playingBoard[playerPosition] = player2Symbol;
+        }
+        setPlayChance();
     }
 
     public static void main(String[] args) {
@@ -61,5 +98,9 @@ public class TicTacToeGame {
         setPlayingSymbol();
 
         showBoard();
+        while(true) {
+            playGame();
+            showBoard();
+        }
     }
 }
