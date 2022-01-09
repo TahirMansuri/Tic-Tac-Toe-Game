@@ -1,5 +1,6 @@
 package com.bridgelabz.tictactoegame;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToeGame {
@@ -108,6 +109,19 @@ public class TicTacToeGame {
         }
     }
 
+    //Uc 6 Make Toss for Player Chance
+    private static void flipToss() {
+        Random tossValue = new Random();
+        int toss = tossValue.nextInt(2)+1;
+        if(toss == 1) {
+            player1Play = 1;
+            System.out.println("Player 1 Won the Toss.");
+        } else {
+            player1Play = 0;
+            System.out.println("Player 2 Won the Toss.");
+        }
+    }
+
     public static void main(String[] args) {
 
         //Tic Tac Toe Game Development
@@ -119,7 +133,13 @@ public class TicTacToeGame {
         //Setting the Symbol for Play
         setPlayingSymbol();
 
+        //Showing the Initial Board
         showBoard();
+
+        //Flip the Toss for Player Play Chance
+        flipToss();
+
+        //Play the Game till Win Or Draw
         while(true) {
             playGame();
             showBoard();
